@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PluginsUsed 1.00\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-09-19 00:19+0800\n"
+"PO-Revision-Date: 2007-09-23 22:08+0800\n"
 "Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
 "Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -19,8 +19,8 @@ msgstr ""
 msgid "There are <strong>%s</strong> plugins used: <strong>%s active plugins</strong> and <strong>%s inactive plugins</strong>."
 msgstr ""
 
-#: pluginsused.php:150
-#: pluginsused.php:154
+#: pluginsused.php:151
+#: pluginsused.php:157
 msgid "url"
 msgstr ""
 
