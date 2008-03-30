@@ -10,7 +10,7 @@ Author URI: http://lesterchan.net
 
 
 /*  
-	Copyright 2007  Lester Chan  (email : gamerz84@hotmail.com)
+	Copyright 2008  Lester Chan  (email : lesterchan@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,6 +26,10 @@ Author URI: http://lesterchan.net
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
+
+
+### Define: Show Plugin Version Number?
+define('PLUGINSUSED_SHOW_VERSION', true);
 
 
 ### Create Text Domain For Translations
@@ -122,7 +126,11 @@ function process_pluginsused() {
 			$plugin_data['Description'] = wp_kses($plugin_data['Description'], $plugins_allowedtags);
 			$plugin_data['Author'] = wp_kses($plugin_data['Author'], $plugins_allowedtags);
 			$plugin_data['Author_URI'] = wp_kses($plugin_data['Author_URI'], $plugins_allowedtags);
-			$plugin_data['Version'] = wp_kses($plugin_data['Version'], $plugins_allowedtags);
+			if(PLUGINSUSED_SHOW_VERSION) {
+				$plugin_data['Version'] = wp_kses($plugin_data['Version'], $plugins_allowedtags);
+			} else {
+				$plugin_data['Version'] = '';
+			}
 			if (!empty($active_plugins) && in_array($plugin_file, $active_plugins)) {
 				$plugins_used['active'][] = $plugin_data;
 			} else {
@@ -148,13 +156,13 @@ function display_pluginsused($type, $display = false) {
 	} else if($type == 'active') {
 		if($plugins_used['active']) {
 			foreach($plugins_used['active'] as $active_plugins) {
-				$temp .= '<p><img src="'.get_option('siteurl').'/wp-content/plugins/wp-pluginsused/images/plugin_active.gif" alt="'.$active_plugins['Plugin_Name'].' '.$active_plugins['Version'].'" title="'.$active_plugins['Plugin_Name'].' '.$active_plugins['Version'].'" style="vertical-align: middle;" />&nbsp;&nbsp;<strong><a href="'.$active_plugins['Plugin_URI'].'" title="'.$active_plugins['Plugin_Name'].' '.$active_plugins['Version'].'">'.$active_plugins['Plugin_Name'].' '.$active_plugins['Version'].'</a></strong><br /><strong>&raquo; '.$active_plugins['Author'].' (<a href="'.$active_plugins['Author_URI'].'" title="'.$active_plugins['Author'].'">'.__('url', 'wp-pluginsused').'</a>)</strong><br />'.$active_plugins['Description'].'</p>';
+				$temp .= '<p><img src="'.get_option('siteurl').'/wp-content/plugins/wp-pluginsused/images/plugin_active.gif" alt="'.$active_plugins['Plugin_Name'].' '.$active_plugins['Version'].'" title="'.$active_plugins['Plugin_Name'].' '.$active_plugins['Version'].'" style="vertical-align: middle;" />&nbsp;&nbsp;<strong><a href="'.$active_plugins['Plugin_URI'].'" title="'.$active_plugins['Plugin_Name'].' '.$active_plugins['Version'].'">'.$active_plugins['Plugin_Name'].' '.$active_plugins['Version'].'</a></strong><br /><strong>&raquo; '.$active_plugins['Author'].' (<a href="'.$active_plugins['Author_URI'].'" title="'.$active_plugins['Author'].'">'.__('url', 'wp-pluginsused').'</a>)</strong><br />'.strip_tags($active_plugins['Description']).'</p>';
 			}
 		}
 	} else{
 		if($plugins_used['inactive']) {
 			foreach($plugins_used['inactive'] as $inactive_plugins) {
-				$temp .= '<p><img src="'.get_option('siteurl').'/wp-content/plugins/wp-pluginsused/images/plugin_inactive.gif" alt="'.$inactive_plugins['Plugin_Name'].' '.$inactive_plugins['Version'].'" title="'.$inactive_plugins['Plugin_Name'].' '.$inactive_plugins['Version'].'" style="vertical-align: middle;" />&nbsp;&nbsp;<strong><a href="'.$inactive_plugins['Plugin_URI'].'" title="'.$inactive_plugins['Plugin_Name'].' '.$inactive_plugins['Version'].'">'.$inactive_plugins['Plugin_Name'].' '.$inactive_plugins['Version'].'</a></strong><br /><strong>&raquo; '.$inactive_plugins['Author'].' (<a href="'.$inactive_plugins['Author_URI'].'" title="'.$inactive_plugins['Author'].'">'.__('url', 'wp-pluginsused').'</a>)</strong><br />'.$inactive_plugins['Description'].'</p>';
+				$temp .= '<p><img src="'.get_option('siteurl').'/wp-content/plugins/wp-pluginsused/images/plugin_inactive.gif" alt="'.$inactive_plugins['Plugin_Name'].' '.$inactive_plugins['Version'].'" title="'.$inactive_plugins['Plugin_Name'].' '.$inactive_plugins['Version'].'" style="vertical-align: middle;" />&nbsp;&nbsp;<strong><a href="'.$inactive_plugins['Plugin_URI'].'" title="'.$inactive_plugins['Plugin_Name'].' '.$inactive_plugins['Version'].'">'.$inactive_plugins['Plugin_Name'].' '.$inactive_plugins['Version'].'</a></strong><br /><strong>&raquo; '.$inactive_plugins['Author'].' (<a href="'.$inactive_plugins['Author_URI'].'" title="'.$inactive_plugins['Author'].'">'.__('url', 'wp-pluginsused').'</a>)</strong><br />'.strip_tags($inactive_plugins['Description']).'</p>';
 			}
 		}
 	}
@@ -166,12 +174,17 @@ function display_pluginsused($type, $display = false) {
 }
 
 
-### Function: Place Plugins Used In Content
-add_filter('the_content', 'place_pluginsused', 7);
-function place_pluginsused($content){
-	$content = str_replace("[stats_pluginsused]", display_pluginsused('stats'), $content);
-	$content = str_replace("[active_pluginsused]", display_pluginsused('active'), $content);
-	$content = str_replace("[inactive_pluginsused]", display_pluginsused('inactive'), $content);
-	return $content;
+### Function: Short Code For Inserting Plugins Used Into Page
+add_shortcode('stats_pluginsused', 'pluginsused_stats_shortcode');
+add_shortcode('active_pluginsused', 'pluginsused_active_shortcode');
+add_shortcode('inactive_pluginsused', 'pluginsused_inactive_shortcode');
+function pluginsused_stats_shortcode($atts) {
+	return display_pluginsused('stats');
+}
+function pluginsused_active_shortcode($atts) {
+	return display_pluginsused('active');
+}
+function pluginsused_inactive_shortcode($atts) {
+	return display_pluginsused('inactive');
 }
 ?>
