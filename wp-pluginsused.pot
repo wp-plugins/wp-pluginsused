@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-PluginsUsed 1.30\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-13 01:14+0800\n"
-"PO-Revision-Date: 2008-05-13 01:14+0800\n"
+"POT-Creation-Date: 2008-06-07 21:50+0800\n"
+"PO-Revision-Date: 2008-06-07 21:50+0800\n"
 "Last-Translator: Lester Chan <lesterchan@gmail.com>\n"
 "Language-Team: Lester Chan <lesterchan@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,8 +20,8 @@ msgstr ""
 msgid "There are <strong>%s</strong> plugins used: <strong>%s active plugins</strong> and <strong>%s inactive plugins</strong>."
 msgstr ""
 
-#: wp-pluginsused.php:159
-#: wp-pluginsused.php:165
+#: wp-pluginsused.php:166
+#: wp-pluginsused.php:179
 msgid "url"
 msgstr ""
 
