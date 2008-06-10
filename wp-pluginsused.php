@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP-PluginsUsed
-Plugin URI: http://lesterchan.net/portfolio/programming.php
+Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Display WordPress plugins that you currently have (both active and inactive) onto a post/page.
 Version: 1.30
 Author: Lester 'GaMerZ' Chan
