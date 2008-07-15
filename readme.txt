@@ -3,7 +3,7 @@ Contributors: GamerZ
 Donate link: http://lesterchan.net/wordpress
 Tags: use, used, plugin, plugins, plugin used, plugins used, plugins use
 Requires at least: 2.5.0
-Stable tag: 1.30
+Stable tag: 1.31
 
 Display WordPress plugins that you currently have (both active and inactive) onto a post/page.
 
