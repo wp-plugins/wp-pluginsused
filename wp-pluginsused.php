@@ -152,7 +152,7 @@ function display_pluginsused($type, $display = false) {
 		$total_active_pluginsused = sizeof($plugins_used['active']);
 		$total_inactive_pluginsused = sizeof($plugins_used['inactive']);
 		$total_pluginsused = ($total_active_pluginsused+$total_inactive_pluginsused);
-		$temp = sprintf(__ngettext('There is <strong>%s</strong> plugin used:', 'There are <strong>%s</strong> plugins used:', $total_pluginsused, 'wp-pluginsused'), $total_pluginsused).' '.sprintf(__ngettext('<strong>%s active plugin</strong>','<strong>%s active plugins</strong>', $total_active_pluginsused, 'wp-pluginsused'), $total_active_pluginsused).' '.__('and', 'wp-pluginsused').' '.sprintf(__ngettext('<strong>%s inactive plugin</strong>.', '<strong>%s inactive plugins</strong>.', $total_inactive_pluginsused, 'wp-pluginsused'), $total_inactive_pluginsused);
+		$temp = sprintf(__ngettext('There is <strong>%s</strong> plugin used:', 'There are <strong>%s</strong> plugins used:', $total_pluginsused, 'wp-pluginsused'), number_format_i18n($total_pluginsused)).' '.sprintf(__ngettext('<strong>%s active plugin</strong>','<strong>%s active plugins</strong>', $total_active_pluginsused, 'wp-pluginsused'), number_format_i18n($total_active_pluginsused)).' '.__('and', 'wp-pluginsused').' '.sprintf(__ngettext('<strong>%s inactive plugin</strong>.', '<strong>%s inactive plugins</strong>.', $total_inactive_pluginsused, 'wp-pluginsused'), number_format_i18n($total_inactive_pluginsused));
 	} else if($type == 'active') {
 		if($plugins_used['active']) {
 			foreach($plugins_used['active'] as $active_plugins) {
