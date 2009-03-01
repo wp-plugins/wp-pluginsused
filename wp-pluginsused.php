@@ -3,14 +3,14 @@
 Plugin Name: WP-PluginsUsed
 Plugin URI: http://lesterchan.net/portfolio/programming/php/
 Description: Display WordPress plugins that you currently have (both active and inactive) onto a post/page.
-Version: 1.40
+Version: 1.50
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
 */
 
 
 /*  
-	Copyright 2008  Lester Chan  (email : lesterchan@gmail.com)
+	Copyright 2009  Lester Chan  (email : lesterchan@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -68,7 +68,7 @@ function get_pluginsused() {
 		return $wp_plugins;
 	}
 	$wp_plugins = array();
-	$plugin_root = ABSPATH.PLUGINDIR;
+	$plugin_root = WP_PLUGIN_DIR;
 	$plugins_dir = @ dir($plugin_root);
 	if($plugins_dir) {
 		while(($file = $plugins_dir->read()) !== false) {
@@ -152,7 +152,7 @@ function display_pluginsused($type, $display = false) {
 		$total_active_pluginsused = sizeof($plugins_used['active']);
 		$total_inactive_pluginsused = sizeof($plugins_used['inactive']);
 		$total_pluginsused = ($total_active_pluginsused+$total_inactive_pluginsused);
-		$temp = sprintf(__ngettext('There is <strong>%s</strong> plugin used:', 'There are <strong>%s</strong> plugins used:', $total_pluginsused, 'wp-pluginsused'), number_format_i18n($total_pluginsused)).' '.sprintf(__ngettext('<strong>%s active plugin</strong>','<strong>%s active plugins</strong>', $total_active_pluginsused, 'wp-pluginsused'), number_format_i18n($total_active_pluginsused)).' '.__('and', 'wp-pluginsused').' '.sprintf(__ngettext('<strong>%s inactive plugin</strong>.', '<strong>%s inactive plugins</strong>.', $total_inactive_pluginsused, 'wp-pluginsused'), number_format_i18n($total_inactive_pluginsused));
+		$temp = sprintf(_n('There is <strong>%s</strong> plugin used:', 'There are <strong>%s</strong> plugins used:', $total_pluginsused, 'wp-pluginsused'), number_format_i18n($total_pluginsused)).' '.sprintf(_n('<strong>%s active plugin</strong>','<strong>%s active plugins</strong>', $total_active_pluginsused, 'wp-pluginsused'), number_format_i18n($total_active_pluginsused)).' '.__('and', 'wp-pluginsused').' '.sprintf(_n('<strong>%s inactive plugin</strong>.', '<strong>%s inactive plugins</strong>.', $total_inactive_pluginsused, 'wp-pluginsused'), number_format_i18n($total_inactive_pluginsused));
 	} else if($type == 'active') {
 		if($plugins_used['active']) {
 			foreach($plugins_used['active'] as $active_plugins) {
