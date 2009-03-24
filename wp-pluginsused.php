@@ -32,6 +32,10 @@ Author URI: http://lesterchan.net
 define('PLUGINSUSED_SHOW_VERSION', true);
 
 
+### Variable: Plugins To Hide?
+$pluginsused_hidden_plugins = array();
+
+
 ### Create Text Domain For Translations
 add_action('init', 'pluginsused_textdomain');
 function pluginsused_textdomain() {
@@ -114,27 +118,29 @@ function get_pluginsused() {
 
 ### Function: Process Plugins Used
 function process_pluginsused() {
-	global $plugins_used;
+	global $plugins_used, $pluginsused_hidden_plugins;
 	if(empty($plugins_used)) {
 		$plugins_used = array();
 		$active_plugins = get_option('active_plugins');
 		$plugins = get_pluginsused();
 		$plugins_allowedtags = array('a' => array('href' => array(),'title' => array()),'abbr' => array('title' => array()),'acronym' => array('title' => array()),'code' => array(),'em' => array(),'strong' => array());
 		foreach($plugins as $plugin_file => $plugin_data) {
-			$plugin_data['Plugin_Name'] = wp_kses($plugin_data['Plugin_Name'], $plugins_allowedtags);
-			$plugin_data['Plugin_URI'] = wp_kses($plugin_data['Plugin_URI'], $plugins_allowedtags);
-			$plugin_data['Description'] = wp_kses($plugin_data['Description'], $plugins_allowedtags);
-			$plugin_data['Author'] = wp_kses($plugin_data['Author'], $plugins_allowedtags);
-			$plugin_data['Author_URI'] = wp_kses($plugin_data['Author_URI'], $plugins_allowedtags);
-			if(PLUGINSUSED_SHOW_VERSION) {
-				$plugin_data['Version'] = wp_kses($plugin_data['Version'], $plugins_allowedtags);
-			} else {
-				$plugin_data['Version'] = '';
-			}
-			if (!empty($active_plugins) && in_array($plugin_file, $active_plugins)) {
-				$plugins_used['active'][] = $plugin_data;
-			} else {
-				$plugins_used['inactive'][] = $plugin_data;
+			if(!in_array($plugin_data['Plugin_Name'], $pluginsused_hidden_plugins)) {
+				$plugin_data['Plugin_Name'] = wp_kses($plugin_data['Plugin_Name'], $plugins_allowedtags);
+				$plugin_data['Plugin_URI'] = wp_kses($plugin_data['Plugin_URI'], $plugins_allowedtags);
+				$plugin_data['Description'] = wp_kses($plugin_data['Description'], $plugins_allowedtags);
+				$plugin_data['Author'] = wp_kses($plugin_data['Author'], $plugins_allowedtags);
+				$plugin_data['Author_URI'] = wp_kses($plugin_data['Author_URI'], $plugins_allowedtags);
+				if(PLUGINSUSED_SHOW_VERSION) {
+					$plugin_data['Version'] = wp_kses($plugin_data['Version'], $plugins_allowedtags);
+				} else {
+					$plugin_data['Version'] = '';
+				}
+				if (!empty($active_plugins) && in_array($plugin_file, $active_plugins)) {
+					$plugins_used['active'][] = $plugin_data;
+				} else {
+					$plugins_used['inactive'][] = $plugin_data;
+				}
 			}
 		}
 	}
