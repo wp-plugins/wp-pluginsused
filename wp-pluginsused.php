@@ -6,6 +6,7 @@ Description: Display WordPress plugins that you currently have (both active and 
 Version: 1.50
 Author: Lester 'GaMerZ' Chan
 Author URI: http://lesterchan.net
+Text Domain: wp-pluginsused
 */
 
 
