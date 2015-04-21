@@ -3,7 +3,7 @@ Contributors: GamerZ
 Donate link: http://lesterchan.net/site/donation/  
 Tags: use, used, plugin, plugins, plugin used, plugins used, plugins use  
 Requires at least: 2.8  
-Tested up to: 4.1  
+Tested up to: 4.2  
 Stable tag: trunk  
 
 Display WordPress plugins that you currently have (both active and inactive) onto a post/page.
@@ -24,7 +24,7 @@ Display WordPress plugins that you currently have (both active and inactive) ont
 * Icons courtesy of [FamFamFam](http://www.famfamfam.com/ "FamFamFam")
 
 = Donations =
-* I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks, I will really appericiate it. If not feel free to use it without any obligations.
+* I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks, I will really appreciate it. If not feel free to use it without any obligations.
 
 == Changelog ==
 
